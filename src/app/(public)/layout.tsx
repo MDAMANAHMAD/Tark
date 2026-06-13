@@ -8,7 +8,7 @@ export default function PublicLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="flex flex-col min-h-screen bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 transition-colors duration-200 relative overflow-hidden bg-grid-pattern">
+    <div className="flex flex-col min-h-screen text-slate-900 dark:text-slate-100 transition-colors duration-200 relative overflow-hidden bg-grid-pattern">
       {/* Cosmic Neon Aura Backdrop Blobs */}
       <div className="absolute top-[-10%] right-[-10%] w-[50vw] h-[50vw] rounded-full bg-purple-500/10 dark:bg-purple-600/15 blur-[120px] pointer-events-none animate-pulse-slow z-0" />
       <div className="absolute bottom-[-10%] left-[-10%] w-[50vw] h-[50vw] rounded-full bg-cyan-500/10 dark:bg-cyan-600/15 blur-[120px] pointer-events-none animate-pulse-slow z-0" style={{ animationDelay: '-6s' }} />

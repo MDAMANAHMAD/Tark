@@ -33,7 +33,7 @@ export default function AdminLayout({
   ];
 
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 flex flex-col md:flex-row transition-colors duration-200 bg-grid-pattern relative overflow-hidden">
+    <div className="min-h-screen text-slate-900 dark:text-slate-100 flex flex-col md:flex-row transition-colors duration-200 bg-grid-pattern relative overflow-hidden">
       {/* Background blobs for fancy student style */}
       <div className="absolute top-[-10%] left-[-10%] w-[40vw] h-[40vw] rounded-full bg-indigo-500/5 dark:bg-indigo-600/10 blur-[100px] pointer-events-none z-0" />
       <div className="absolute bottom-[-10%] right-[-10%] w-[40vw] h-[40vw] rounded-full bg-pink-500/5 dark:bg-pink-650/10 blur-[100px] pointer-events-none z-0" />
