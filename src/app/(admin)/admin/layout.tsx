@@ -52,9 +52,8 @@ export default function AdminLayout({
         </button>
       </header>
 
-      {/* Sidebar Navigation */}
       <aside className={`
-        relative z-20 fixed inset-y-0 left-0 z-40 w-64 bg-white/85 dark:bg-slate-900/85 backdrop-blur-md border-r border-slate-200/80 dark:border-slate-800/80 p-6 flex flex-col justify-between transform transition-transform duration-300 md:relative md:transform-none md:translate-x-0
+        fixed inset-y-0 left-0 z-40 w-64 bg-white/85 dark:bg-slate-900/85 backdrop-blur-md border-r border-slate-200/80 dark:border-slate-800/80 p-6 flex flex-col justify-between transform transition-transform duration-300 md:sticky md:top-0 md:h-screen md:transform-none md:translate-x-0
         ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'}
       `}>
         <div className="space-y-8">
