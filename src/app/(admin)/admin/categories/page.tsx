@@ -145,8 +145,7 @@ export default function AdminCategoriesPage() {
       )}
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-        {/* Add category panel */}
-        <section className="lg:col-span-4 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-6 rounded-2xl shadow-sm space-y-4">
+        <section className="lg:col-span-4 glass-card border border-slate-200/80 dark:border-slate-800/80 p-6 rounded-2xl shadow-sm space-y-4">
           <h3 className="font-bold text-slate-900 dark:text-slate-100 flex items-center gap-1.5">
             <Plus className="w-4 h-4 text-blue-500" />
             Add New Category
@@ -178,14 +177,14 @@ export default function AdminCategoriesPage() {
         </section>
 
         {/* Categories List */}
-        <section className="lg:col-span-8 bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800 rounded-2xl shadow-sm overflow-hidden">
+        <section className="lg:col-span-8 glass-card border border-slate-200/80 dark:border-slate-800/80 rounded-2xl shadow-sm overflow-hidden">
           {isLoading ? (
             <div className="text-center py-16 text-slate-400 animate-pulse">Loading categories index...</div>
           ) : categories.length > 0 ? (
             <div className="overflow-x-auto">
               <table className="w-full text-left border-collapse text-sm">
                 <thead>
-                  <tr className="bg-slate-50 dark:bg-slate-950 border-b border-slate-100 dark:border-slate-800 text-xs font-bold uppercase text-slate-400">
+                  <tr className="bg-slate-50 dark:bg-slate-950 border-b border-slate-200/60 dark:border-slate-800 text-xs font-bold uppercase text-slate-400">
                     <th className="px-6 py-4">Name</th>
                     <th className="px-6 py-4">URL Slug</th>
                     <th className="px-6 py-4 text-right">Actions</th>
@@ -209,42 +208,44 @@ export default function AdminCategoriesPage() {
                       <td className="px-6 py-4 text-slate-400 dark:text-slate-500 font-mono text-xs">
                         {cat.slug}
                       </td>
-                      <td className="px-6 py-4 text-right space-x-2">
-                        {editingCatId === cat._id ? (
-                          <>
-                            <button
-                              onClick={() => handleEditSave(cat._id)}
-                              className="inline-flex p-1.5 rounded-lg border border-slate-100 dark:border-slate-800 hover:bg-emerald-50 dark:hover:bg-emerald-950/20 text-emerald-600"
-                              title="Save Changes"
-                            >
-                              <Save className="w-4 h-4" />
-                            </button>
-                            <button
-                              onClick={() => setEditingCatId(null)}
-                              className="inline-flex p-1.5 rounded-lg border border-slate-100 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-850 text-slate-450"
-                              title="Cancel"
-                            >
-                              <X className="w-4 h-4" />
-                            </button>
-                          </>
-                        ) : (
-                          <>
-                            <button
-                              onClick={() => handleEditClick(cat)}
-                              className="inline-flex p-1.5 rounded-lg border border-slate-100 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-850 text-blue-600 hover:text-blue-800"
-                              title="Edit Category"
-                            >
-                              <Edit className="w-4 h-4" />
-                            </button>
-                            <button
-                              onClick={() => handleDeleteClick(cat)}
-                              className="inline-flex p-1.5 rounded-lg border border-slate-100 dark:border-slate-800 hover:bg-rose-50 dark:hover:bg-rose-950/20 text-rose-600 hover:text-rose-800"
-                              title="Delete Category"
-                            >
-                              <Trash2 className="w-4 h-4" />
-                            </button>
-                          </>
-                        )}
+                      <td className="px-6 py-4">
+                        <div className="flex items-center justify-end gap-2.5 whitespace-nowrap">
+                          {editingCatId === cat._id ? (
+                            <>
+                              <button
+                                onClick={() => handleEditSave(cat._id)}
+                                className="inline-flex p-1.5 rounded-lg border border-slate-200 dark:border-slate-800 hover:bg-emerald-50 dark:hover:bg-emerald-950/20 text-emerald-600"
+                                title="Save Changes"
+                              >
+                                <Save className="w-4 h-4" />
+                              </button>
+                              <button
+                                onClick={() => setEditingCatId(null)}
+                                className="inline-flex p-1.5 rounded-lg border border-slate-200 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-850 text-slate-450"
+                                title="Cancel"
+                              >
+                                <X className="w-4 h-4" />
+                              </button>
+                            </>
+                          ) : (
+                            <>
+                              <button
+                                onClick={() => handleEditClick(cat)}
+                                className="inline-flex p-1.5 rounded-lg border border-slate-200 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-850 text-blue-600 hover:text-blue-800"
+                                title="Edit Category"
+                              >
+                                <Edit className="w-4 h-4" />
+                              </button>
+                              <button
+                                onClick={() => handleDeleteClick(cat)}
+                                className="inline-flex p-1.5 rounded-lg border border-slate-200 dark:border-slate-800 hover:bg-rose-50 dark:hover:bg-rose-950/20 text-rose-600 hover:text-rose-800"
+                                title="Delete Category"
+                              >
+                                <Trash2 className="w-4 h-4" />
+                              </button>
+                            </>
+                          )}
+                        </div>
                       </td>
                     </tr>
                   ))}

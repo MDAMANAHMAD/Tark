@@ -112,19 +112,19 @@ export default function AdminDashboardPage() {
       <header className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
           <h1 className="text-3xl font-extrabold tracking-tight">Overview Dashboard</h1>
-          <p className="text-sm text-slate-505 dark:text-slate-400 mt-1">Real-time metrics, recent activity, and website health indicators</p>
+          <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">Real-time metrics, recent activity, and website health indicators</p>
         </div>
-        <div className="flex gap-3">
+        <div className="flex items-center gap-3">
           <button 
             onClick={fetchStats}
-            className="p-2.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-white/70 dark:bg-slate-900/50 hover:bg-slate-100 dark:hover:bg-slate-850 transition-all text-slate-500"
+            className="h-10 w-10 flex items-center justify-center rounded-xl border border-slate-200 dark:border-slate-800 bg-white/70 dark:bg-slate-900/50 hover:bg-slate-100 dark:hover:bg-slate-850 transition-all text-slate-500 hover:text-slate-800 dark:hover:text-slate-200"
             title="Refresh statistics"
           >
             <RefreshCw className="w-5 h-5 animate-hover-spin" />
           </button>
           <Link
             href="/admin/posts/new"
-            className="inline-flex items-center gap-2 px-4 py-2.5 bg-gradient-to-r from-blue-600 to-indigo-650 hover:from-blue-700 hover:to-indigo-750 text-white font-bold rounded-xl text-sm transition-all shadow-lg shadow-indigo-500/10 hover:scale-[1.02]"
+            className="h-10 px-4 flex items-center justify-center gap-2 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-bold rounded-xl text-sm transition-all shadow-lg shadow-indigo-500/10 hover:scale-[1.02]"
           >
             <Plus className="w-4 h-4" />
             Write Blog Post
@@ -332,8 +332,8 @@ export default function AdminDashboardPage() {
                         comment.status === 'approved' 
                           ? 'bg-emerald-50 text-emerald-600 dark:bg-emerald-950/20 dark:text-emerald-400' 
                           : comment.status === 'rejected'
-                          ? 'bg-rose-50 text-rose-600 dark:bg-rose-955/20 dark:text-rose-400'
-                          : 'bg-amber-50 text-amber-600 dark:bg-amber-955/20 dark:text-amber-400'
+                          ? 'bg-rose-50 text-rose-600 dark:bg-rose-950/20 dark:text-rose-400'
+                          : 'bg-amber-50 text-amber-600 dark:bg-amber-900/20 dark:text-amber-400'
                       }`}>
                         {comment.status}
                       </span>
@@ -385,7 +385,7 @@ export default function AdminDashboardPage() {
                     <div className="font-bold text-slate-700 dark:text-slate-300">
                       Sub: {msg.subject}
                     </div>
-                    <p className="text-slate-505 dark:text-slate-405 line-clamp-2 leading-relaxed">
+                    <p className="text-slate-500 dark:text-slate-400 line-clamp-2 leading-relaxed">
                       {msg.message}
                     </p>
                   </div>

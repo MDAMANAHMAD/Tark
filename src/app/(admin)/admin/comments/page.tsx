@@ -137,83 +137,89 @@ export default function AdminCommentsPage() {
       </header>
 
       {/* Grid List */}
-      <div className="bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800 rounded-2xl shadow-sm overflow-hidden">
+      <div className="glass-card border border-slate-200/80 dark:border-slate-800/80 rounded-2xl shadow-sm overflow-hidden">
         {isLoading ? (
           <div className="text-center py-20 text-slate-400 animate-pulse">Loading comments stream...</div>
         ) : filteredComments.length > 0 ? (
-          <div className="overflow-x-auto">
-            <table className="w-full text-left border-collapse text-sm">
-              <thead>
-                <tr className="bg-slate-50 dark:bg-slate-950 border-b border-slate-200/60 dark:border-slate-800 text-xs font-bold uppercase text-slate-400">
-                  <th className="px-6 py-4">Author</th>
-                  <th className="px-6 py-4">Comment</th>
-                  <th className="px-6 py-4">Post Link</th>
-                  <th className="px-6 py-4">Status</th>
-                  <th className="px-6 py-4">Posted Date</th>
-                  <th className="px-6 py-4 text-right">Moderation Actions</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-slate-100 dark:divide-slate-800 text-xs md:text-sm">
-                {filteredComments.map((comment) => (
-                  <tr key={comment._id} className="hover:bg-slate-50/40 dark:hover:bg-slate-950/20 transition-colors">
-                    <td className="px-6 py-4">
-                      <p className="font-bold text-slate-800 dark:text-slate-200">{comment.name}</p>
-                      <p className="text-xxs text-slate-400 font-mono mt-0.5">{comment.email}</p>
-                    </td>
-                    <td className="px-6 py-4 max-w-sm">
-                      <p className="text-slate-600 dark:text-slate-400 leading-relaxed break-words whitespace-pre-wrap">
-                        {comment.content}
-                      </p>
-                    </td>
-                    <td className="px-6 py-4 max-w-xxs truncate">
+          <div className="divide-y divide-slate-100 dark:divide-slate-800">
+            {filteredComments.map((comment) => (
+              <div 
+                key={comment._id} 
+                className="p-6 hover:bg-slate-50/40 dark:hover:bg-slate-950/10 transition-colors flex flex-col md:flex-row md:items-start justify-between gap-4"
+              >
+                <div className="space-y-3 flex-1 min-w-0">
+                  {/* Author Header */}
+                  <div className="flex flex-wrap items-center gap-x-2.5 gap-y-1 text-xs">
+                    <span className="font-bold text-slate-800 dark:text-slate-200 text-sm">
+                      {comment.name}
+                    </span>
+                    <span className="text-slate-400 dark:text-slate-500 font-mono text-[11px] truncate max-w-[180px]" title={comment.email}>
+                      ({comment.email})
+                    </span>
+                    <span className="text-slate-300 dark:text-slate-700 hidden sm:inline">•</span>
+                    <span className="text-slate-400 dark:text-slate-500 flex items-center gap-1">
+                      {formatDate(comment.createdAt)}
+                    </span>
+                  </div>
+
+                  {/* Comment Body */}
+                  <div className="text-sm text-slate-700 dark:text-slate-300 leading-relaxed break-words whitespace-pre-wrap">
+                    {comment.content}
+                  </div>
+
+                  {/* Context Link */}
+                  {comment.postId && (
+                    <div className="text-xs flex items-center gap-1.5 text-slate-400 dark:text-slate-500">
+                      <span>Article:</span>
                       <a 
-                        href={`/blog/${comment.postId?.slug}`}
+                        href={`/blog/${comment.postId.slug}`}
                         target="_blank" 
                         rel="noreferrer"
-                        className="text-blue-600 dark:text-blue-400 hover:underline font-semibold"
+                        className="text-blue-600 dark:text-blue-400 hover:underline font-semibold truncate max-w-[280px] sm:max-w-md"
+                        title={comment.postId.title}
                       >
-                        {comment.postId?.title}
+                        {comment.postId.title}
                       </a>
-                    </td>
-                    <td className="px-6 py-4">
-                      <span className={`px-2 py-0.5 rounded text-xxs font-bold uppercase ${getStatusBadge(comment.status)}`}>
-                        {comment.status}
-                      </span>
-                    </td>
-                    <td className="px-6 py-4 text-slate-500 dark:text-slate-400 whitespace-nowrap">
-                      {formatDate(comment.createdAt)}
-                    </td>
-                    <td className="px-6 py-4 text-right space-x-1.5 whitespace-nowrap">
-                      {comment.status !== 'approved' && (
-                        <button
-                          onClick={() => handleUpdateStatus(comment._id, 'approved')}
-                          className="inline-flex p-1.5 rounded-lg border border-emerald-100 dark:border-emerald-900/20 hover:bg-emerald-50 dark:hover:bg-emerald-900/20 text-emerald-600"
-                          title="Approve Comment"
-                        >
-                          <Check className="w-4 h-4" />
-                        </button>
-                      )}
-                      {comment.status !== 'rejected' && (
-                        <button
-                          onClick={() => handleUpdateStatus(comment._id, 'rejected')}
-                          className="inline-flex p-1.5 rounded-lg border border-amber-100 dark:border-amber-900/20 hover:bg-amber-50 dark:hover:bg-amber-900/20 text-amber-600"
-                          title="Reject Comment"
-                        >
-                          <X className="w-4 h-4" />
-                        </button>
-                      )}
+                    </div>
+                  )}
+                </div>
+
+                {/* Badging and Actions */}
+                <div className="flex flex-row md:flex-col items-center md:items-end justify-between md:justify-start gap-4 pt-4 md:pt-0 border-t md:border-t-0 border-slate-100 dark:border-slate-800/60 shrink-0">
+                  <span className={`px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider ${getStatusBadge(comment.status)}`}>
+                    {comment.status}
+                  </span>
+                  
+                  <div className="flex items-center gap-2">
+                    {comment.status !== 'approved' && (
                       <button
-                        onClick={() => handleDeleteClick(comment)}
-                        className="inline-flex p-1.5 rounded-lg border border-slate-100 dark:border-slate-800 hover:bg-rose-50 dark:hover:bg-rose-905/20 text-rose-650 hover:text-rose-800"
-                        title="Delete Comment"
+                        onClick={() => handleUpdateStatus(comment._id, 'approved')}
+                        className="inline-flex p-2 rounded-xl border border-emerald-100 dark:border-emerald-900/30 hover:bg-emerald-50 dark:hover:bg-emerald-950/20 text-emerald-600 dark:text-emerald-400 transition-colors"
+                        title="Approve Comment"
                       >
-                        <Trash2 className="w-4 h-4" />
+                        <Check className="w-4.5 h-4.5" />
                       </button>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+                    )}
+                    {comment.status !== 'rejected' && (
+                      <button
+                        onClick={() => handleUpdateStatus(comment._id, 'rejected')}
+                        className="inline-flex p-2 rounded-xl border border-amber-100 dark:border-amber-900/30 hover:bg-amber-50 dark:hover:bg-amber-950/20 text-amber-600 dark:text-amber-400 transition-colors"
+                        title="Reject Comment"
+                      >
+                        <X className="w-4.5 h-4.5" />
+                      </button>
+                    )}
+                    <button
+                      onClick={() => handleDeleteClick(comment)}
+                      className="inline-flex p-2 rounded-xl border border-slate-200 dark:border-slate-800 hover:bg-rose-50 dark:hover:bg-rose-950/20 text-rose-600 dark:text-rose-450 transition-colors"
+                      title="Delete Comment"
+                    >
+                      <Trash2 className="w-4.5 h-4.5" />
+                    </button>
+                  </div>
+                </div>
+              </div>
+            ))}
           </div>
         ) : (
           <div className="text-center py-16 text-slate-400 dark:text-slate-500">

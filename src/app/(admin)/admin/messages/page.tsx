@@ -53,7 +53,7 @@ export default function AdminMessagesPage() {
       </header>
 
       {/* Message index grid */}
-      <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl shadow-sm overflow-hidden">
+      <div className="glass-card border border-slate-200/80 dark:border-slate-800/80 rounded-2xl shadow-sm overflow-hidden">
         {isLoading ? (
           <div className="text-center py-20 text-slate-400 animate-pulse">Loading contact submissions...</div>
         ) : messages.length > 0 ? (
@@ -82,8 +82,10 @@ export default function AdminMessagesPage() {
                     <td className="px-6 py-4 font-semibold text-slate-700 dark:text-slate-300">
                       {msg.subject}
                     </td>
-                    <td className="px-6 py-4 max-w-xs text-slate-500 truncate" title={msg.message}>
-                      {msg.message}
+                    <td className="px-6 py-4">
+                      <div className="max-w-[280px] truncate text-slate-500 dark:text-slate-400" title={msg.message}>
+                        {msg.message}
+                      </div>
                     </td>
                     <td className="px-6 py-4 text-slate-500 dark:text-slate-400 whitespace-nowrap">
                       <span className="flex items-center gap-1">

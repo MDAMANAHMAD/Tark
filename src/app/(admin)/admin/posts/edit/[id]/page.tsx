@@ -219,7 +219,7 @@ export default function EditPostPage({
       </header>
 
       {errorMsg && (
-        <div className="p-4 bg-rose-55 border border-rose-200 dark:bg-rose-955/20 dark:border-rose-800 text-rose-600 dark:text-rose-400 rounded-xl text-sm font-semibold">
+        <div className="p-4 bg-rose-50 border border-rose-200 dark:bg-rose-950/20 dark:border-rose-800 text-rose-600 dark:text-rose-400 rounded-xl text-sm font-semibold">
           {errorMsg}
         </div>
       )}
