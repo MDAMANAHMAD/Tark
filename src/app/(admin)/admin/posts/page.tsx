@@ -132,7 +132,7 @@ export default function AdminPostsPage() {
       </div>
 
       {/* Table grid */}
-      <div className="bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-850 rounded-2xl shadow-sm overflow-hidden">
+      <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl shadow-sm overflow-hidden">
         {isLoading ? (
           <div className="text-center py-20 text-slate-400 animate-pulse">Loading posts catalog...</div>
         ) : posts.length > 0 ? (
@@ -157,9 +157,11 @@ export default function AdminPostsPage() {
                     <td className="px-6 py-4 text-slate-500 dark:text-slate-400">
                       {post.category.name}
                     </td>
-                    <td className="px-6 py-4 text-slate-500 dark:text-slate-400 flex items-center gap-1">
-                      <Eye className="w-3.5 h-3.5" />
-                      {post.views}
+                     <td className="px-6 py-4 text-slate-500 dark:text-slate-400">
+                      <div className="flex items-center gap-1.5">
+                        <Eye className="w-3.5 h-3.5" />
+                        <span>{post.views}</span>
+                      </div>
                     </td>
                     <td className="px-6 py-4">
                       <span className={`px-2.5 py-0.5 rounded text-xxs font-semibold uppercase ${getStatusBadge(post.status)}`}>
@@ -175,29 +177,31 @@ export default function AdminPostsPage() {
                     <td className="px-6 py-4 text-slate-500 dark:text-slate-400">
                       {formatDate(post.createdAt)}
                     </td>
-                    <td className="px-6 py-4 text-right space-x-2">
-                      <Link
-                        href={`/blog/${post.slug}`}
-                        target="_blank"
-                        className="inline-flex p-1.5 rounded-lg border border-slate-100 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-850 text-slate-450 hover:text-slate-700 dark:hover:text-slate-200"
-                        title="Preview Article"
-                      >
-                        <ExternalLink className="w-4 h-4" />
-                      </Link>
-                      <Link
-                        href={`/admin/posts/edit/${post._id}`}
-                        className="inline-flex p-1.5 rounded-lg border border-slate-100 dark:border-slate-800 hover:bg-slate-55 dark:hover:bg-slate-850 text-blue-600 hover:text-blue-800"
-                        title="Edit Article"
-                      >
-                        <Edit className="w-4 h-4" />
-                      </Link>
-                      <button
-                        onClick={() => handleDeleteClick(post)}
-                        className="inline-flex p-1.5 rounded-lg border border-slate-100 dark:border-slate-800 hover:bg-rose-50 dark:hover:bg-rose-950/20 text-rose-600 hover:text-rose-800"
-                        title="Delete Article"
-                      >
-                        <Trash2 className="w-4 h-4" />
-                      </button>
+                    <td className="px-6 py-4">
+                      <div className="flex items-center justify-end gap-2.5 whitespace-nowrap">
+                        <Link
+                          href={`/blog/${post.slug}`}
+                          target="_blank"
+                          className="inline-flex p-1.5 rounded-lg border border-slate-200 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-850 text-slate-450 hover:text-slate-700 dark:hover:text-slate-200"
+                          title="Preview Article"
+                        >
+                          <ExternalLink className="w-4 h-4" />
+                        </Link>
+                        <Link
+                          href={`/admin/posts/edit/${post._id}`}
+                          className="inline-flex p-1.5 rounded-lg border border-slate-200 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-850 text-blue-600 hover:text-blue-850"
+                          title="Edit Article"
+                        >
+                          <Edit className="w-4 h-4" />
+                        </Link>
+                        <button
+                          onClick={() => handleDeleteClick(post)}
+                          className="inline-flex p-1.5 rounded-lg border border-slate-200 dark:border-slate-800 hover:bg-rose-50/50 dark:hover:bg-rose-950/20 text-rose-600 hover:text-rose-800"
+                          title="Delete Article"
+                        >
+                          <Trash2 className="w-4 h-4" />
+                        </button>
+                      </div>
                     </td>
                   </tr>
                 ))}

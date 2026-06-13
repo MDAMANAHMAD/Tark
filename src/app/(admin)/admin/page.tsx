@@ -95,11 +95,11 @@ export default function AdminDashboardPage() {
 
   // Calculate SVG line chart coordinates if views exist
   const maxViews = viewsOverTime.length > 0 ? Math.max(...viewsOverTime.map(d => d.views), 10) : 10;
-  const chartHeight = 160;
-  const chartWidth = 500;
+  const chartHeight = 150;
+  const chartWidth = 440; // Starts at x=45, ends at x=485
   const points = viewsOverTime.map((d, index) => {
-    const x = (index / (viewsOverTime.length - 1)) * chartWidth;
-    const y = chartHeight - (d.views / maxViews) * chartHeight + 20; // 20px padding top
+    const x = 45 + (index / (viewsOverTime.length - 1 || 1)) * chartWidth;
+    const y = 170 - (d.views / maxViews) * chartHeight; // y goes from 20 to 170
     return { x, y };
   });
   const pathData = points.length > 0 
@@ -112,19 +112,19 @@ export default function AdminDashboardPage() {
       <header className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
           <h1 className="text-3xl font-extrabold tracking-tight">Overview Dashboard</h1>
-          <p className="text-sm text-slate-500 mt-1">Real-time metrics, recent activity, and website health indicators</p>
+          <p className="text-sm text-slate-505 dark:text-slate-400 mt-1">Real-time metrics, recent activity, and website health indicators</p>
         </div>
         <div className="flex gap-3">
           <button 
             onClick={fetchStats}
-            className="p-2.5 rounded-xl border border-slate-200 dark:border-slate-850 hover:bg-slate-100 dark:hover:bg-slate-850 transition-all text-slate-500"
+            className="p-2.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-white/70 dark:bg-slate-900/50 hover:bg-slate-100 dark:hover:bg-slate-850 transition-all text-slate-500"
             title="Refresh statistics"
           >
-            <RefreshCw className="w-5 h-5" />
+            <RefreshCw className="w-5 h-5 animate-hover-spin" />
           </button>
           <Link
             href="/admin/posts/new"
-            className="inline-flex items-center gap-2 px-4 py-2.5 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-bold rounded-xl text-sm transition-all shadow-md shadow-indigo-500/10 hover:scale-[1.02]"
+            className="inline-flex items-center gap-2 px-4 py-2.5 bg-gradient-to-r from-blue-600 to-indigo-650 hover:from-blue-700 hover:to-indigo-750 text-white font-bold rounded-xl text-sm transition-all shadow-lg shadow-indigo-500/10 hover:scale-[1.02]"
           >
             <Plus className="w-4 h-4" />
             Write Blog Post
@@ -136,8 +136,8 @@ export default function AdminDashboardPage() {
       {metrics && (
         <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {/* Card 1: Posts */}
-          <div className="bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-850 p-6 rounded-2xl shadow-sm flex items-center gap-4">
-            <div className="p-3 bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-450 rounded-xl">
+          <div className="glass-card border border-slate-200/80 dark:border-slate-800/80 p-6 rounded-2xl shadow-sm flex items-center gap-4 hover:border-blue-500/30 dark:hover:border-blue-500/30 transition-all duration-300">
+            <div className="p-3 bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400 rounded-xl">
               <FileText className="w-6 h-6" />
             </div>
             <div>
@@ -147,8 +147,8 @@ export default function AdminDashboardPage() {
           </div>
 
           {/* Card 2: Views */}
-          <div className="bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-850 p-6 rounded-2xl shadow-sm flex items-center gap-4">
-            <div className="p-3 bg-teal-50 dark:bg-teal-900/20 text-teal-600 dark:text-teal-450 rounded-xl">
+          <div className="glass-card border border-slate-200/80 dark:border-slate-800/80 p-6 rounded-2xl shadow-sm flex items-center gap-4 hover:border-teal-500/30 dark:hover:border-teal-500/30 transition-all duration-300">
+            <div className="p-3 bg-teal-50 dark:bg-teal-900/20 text-teal-600 dark:text-teal-400 rounded-xl">
               <Eye className="w-6 h-6" />
             </div>
             <div>
@@ -158,8 +158,8 @@ export default function AdminDashboardPage() {
           </div>
 
           {/* Card 3: Comments */}
-          <div className="bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-850 p-6 rounded-2xl shadow-sm flex items-center gap-4">
-            <div className="p-3 bg-violet-50 dark:bg-violet-900/20 text-violet-600 dark:text-violet-455 rounded-xl">
+          <div className="glass-card border border-slate-200/80 dark:border-slate-800/80 p-6 rounded-2xl shadow-sm flex items-center gap-4 hover:border-purple-500/30 dark:hover:border-purple-500/30 transition-all duration-300">
+            <div className="p-3 bg-violet-50 dark:bg-violet-900/20 text-violet-650 dark:text-violet-400 rounded-xl">
               <MessageSquare className="w-6 h-6" />
             </div>
             <div>
@@ -169,8 +169,8 @@ export default function AdminDashboardPage() {
           </div>
 
           {/* Card 4: Categories */}
-          <div className="bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-850 p-6 rounded-2xl shadow-sm flex items-center gap-4">
-            <div className="p-3 bg-amber-50 dark:bg-amber-900/20 text-amber-600 dark:text-amber-455 rounded-xl">
+          <div className="glass-card border border-slate-200/80 dark:border-slate-800/80 p-6 rounded-2xl shadow-sm flex items-center gap-4 hover:border-amber-500/30 dark:hover:border-amber-500/30 transition-all duration-300">
+            <div className="p-3 bg-amber-50 dark:bg-amber-900/20 text-amber-600 dark:text-amber-400 rounded-xl">
               <FolderTree className="w-6 h-6" />
             </div>
             <div>
@@ -184,27 +184,38 @@ export default function AdminDashboardPage() {
       {/* Analytics Chart & Recent Posts */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
         {/* Weekly Views Line Chart */}
-        <section className="lg:col-span-8 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-6 rounded-3xl shadow-sm space-y-4">
+        <section className="lg:col-span-8 glass-card border border-slate-200/80 dark:border-slate-800/80 p-6 rounded-3xl shadow-sm space-y-4">
           <div className="flex items-center justify-between">
             <h3 className="font-bold text-slate-900 dark:text-slate-100">Views Traffic (Past 7 Days)</h3>
-            <span className="text-xs font-medium px-2 py-1 bg-slate-100 dark:bg-slate-800 rounded text-slate-500">Auto-Generated</span>
+            <span className="text-xs font-semibold px-2.5 py-1 bg-blue-50 dark:bg-blue-900/20 border border-blue-100/30 dark:border-blue-900/10 rounded-lg text-blue-600 dark:text-blue-400">Live Telemetry</span>
           </div>
 
-          <div className="w-full aspect-[21/9] min-h-[200px] flex items-center justify-center pt-4">
+          <div className="w-full aspect-[21/9] min-h-[220px] flex items-center justify-center pt-2">
             {viewsOverTime.length > 0 ? (
               <div className="w-full flex flex-col items-center">
-                <svg className="w-full overflow-visible" viewBox={`0 0 ${chartWidth} ${chartHeight + 40}`}>
+                <svg className="w-full overflow-visible" viewBox="0 0 500 210">
                   {/* Grid Lines */}
-                  <line x1="0" y1="20" x2={chartWidth} y2="20" stroke="#e2e8f0" strokeDasharray="3 3" className="dark:stroke-slate-800" />
-                  <line x1="0" y1={chartHeight/2 + 20} x2={chartWidth} y2={chartHeight/2 + 20} stroke="#e2e8f0" strokeDasharray="3 3" className="dark:stroke-slate-800" />
-                  <line x1="0" y1={chartHeight + 20} x2={chartWidth} y2={chartHeight + 20} stroke="#e2e8f0" className="dark:stroke-slate-800" />
+                  <line x1="45" y1="20" x2="485" y2="20" stroke="#e2e8f0" strokeDasharray="3 3" className="dark:stroke-slate-800" />
+                  <line x1="45" y1="95" x2="485" y2="95" stroke="#e2e8f0" strokeDasharray="3 3" className="dark:stroke-slate-800" />
+                  <line x1="45" y1="170" x2="485" y2="170" stroke="#e2e8f0" className="dark:stroke-slate-800" />
+
+                  {/* Y Axis Labels */}
+                  <text x="35" y="24" textAnchor="end" className="fill-slate-400 dark:fill-slate-500 font-bold text-[10px] tabular-nums">
+                    {Math.round(maxViews)}
+                  </text>
+                  <text x="35" y="99" textAnchor="end" className="fill-slate-400 dark:fill-slate-500 font-bold text-[10px] tabular-nums">
+                    {Math.round(maxViews / 2)}
+                  </text>
+                  <text x="35" y="174" textAnchor="end" className="fill-slate-400 dark:fill-slate-500 font-bold text-[10px] tabular-nums">
+                    0
+                  </text>
 
                   {/* Gradient Area below line */}
                   {points.length > 0 && (
                     <path
-                      d={`${pathData} L ${points[points.length-1].x} ${chartHeight + 20} L ${points[0].x} ${chartHeight + 20} Z`}
+                      d={`${pathData} L ${points[points.length-1].x} 170 L ${points[0].x} 170 Z`}
                       fill="url(#gradient-chart)"
-                      opacity="0.12"
+                      opacity="0.15"
                     />
                   )}
 
@@ -220,15 +231,31 @@ export default function AdminDashboardPage() {
 
                   {/* Dots on nodes */}
                   {points.map((p, idx) => (
-                    <circle
+                    <g key={idx} className="group/dot cursor-pointer">
+                      <circle
+                        cx={p.x}
+                        cy={p.y}
+                        r="4.5"
+                        fill="#ffffff"
+                        stroke="#2563eb"
+                        strokeWidth="2.5"
+                        className="transition-all duration-200 hover:r-6 hover:stroke-indigo-500"
+                      />
+                      <title>{`${viewsOverTime[idx].day}: ${Math.round(viewsOverTime[idx].views)} views`}</title>
+                    </g>
+                  ))}
+
+                  {/* X Axis Labels inside SVG */}
+                  {points.map((p, idx) => (
+                    <text
                       key={idx}
-                      cx={p.x}
-                      cy={p.y}
-                      r="4.5"
-                      fill="#ffffff"
-                      stroke="#2563eb"
-                      strokeWidth="2.5"
-                    />
+                      x={p.x}
+                      y="192"
+                      textAnchor="middle"
+                      className="fill-slate-400 dark:fill-slate-500 font-bold text-[10px] tracking-tight"
+                    >
+                      {viewsOverTime[idx].day}
+                    </text>
                   ))}
 
                   {/* Gradient definition */}
@@ -239,13 +266,6 @@ export default function AdminDashboardPage() {
                     </linearGradient>
                   </defs>
                 </svg>
-
-                {/* X Axis Labels */}
-                <div className="w-full flex justify-between px-1.5 mt-3 text-xs font-semibold text-slate-400">
-                  {viewsOverTime.map((d, i) => (
-                    <span key={i}>{d.day}</span>
-                  ))}
-                </div>
               </div>
             ) : (
               <p className="text-sm text-slate-400">Not enough data to display chart</p>
@@ -254,7 +274,7 @@ export default function AdminDashboardPage() {
         </section>
 
         {/* Recent Blog Posts Panel */}
-        <section className="lg:col-span-4 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-6 rounded-3xl shadow-sm flex flex-col justify-between">
+        <section className="lg:col-span-4 glass-card border border-slate-200/80 dark:border-slate-800/80 p-6 rounded-3xl shadow-sm flex flex-col justify-between">
           <div className="space-y-4">
             <h3 className="font-bold text-slate-900 dark:text-slate-100">Recent Publications</h3>
             
@@ -295,7 +315,7 @@ export default function AdminDashboardPage() {
       {/* Messages and Comments moderation */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         {/* Recent Comments Moderation */}
-        <section className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-6 rounded-3xl shadow-sm flex flex-col justify-between">
+        <section className="glass-card border border-slate-200/80 dark:border-slate-800/80 p-6 rounded-3xl shadow-sm flex flex-col justify-between">
           <div className="space-y-4">
             <h3 className="font-bold text-slate-900 dark:text-slate-100 flex items-center gap-2">
               <MessageSquareCheck className="w-5 h-5 text-indigo-500" />
@@ -344,7 +364,7 @@ export default function AdminDashboardPage() {
         </section>
 
         {/* Recent Inquiries */}
-        <section className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-6 rounded-3xl shadow-sm flex flex-col justify-between">
+        <section className="glass-card border border-slate-200/80 dark:border-slate-800/80 p-6 rounded-3xl shadow-sm flex flex-col justify-between">
           <div className="space-y-4">
             <h3 className="font-bold text-slate-900 dark:text-slate-100 flex items-center gap-2">
               <Mail className="w-5 h-5 text-teal-500" />

@@ -33,9 +33,13 @@ export default function AdminLayout({
   ];
 
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 flex flex-col md:flex-row transition-colors duration-200">
+    <div className="min-h-screen bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 flex flex-col md:flex-row transition-colors duration-200 bg-grid-pattern relative overflow-hidden">
+      {/* Background blobs for fancy student style */}
+      <div className="absolute top-[-10%] left-[-10%] w-[40vw] h-[40vw] rounded-full bg-indigo-500/5 dark:bg-indigo-600/10 blur-[100px] pointer-events-none z-0" />
+      <div className="absolute bottom-[-10%] right-[-10%] w-[40vw] h-[40vw] rounded-full bg-pink-500/5 dark:bg-pink-650/10 blur-[100px] pointer-events-none z-0" />
+      
       {/* Mobile Top Bar */}
-      <header className="md:hidden flex items-center justify-between px-6 py-4 bg-white dark:bg-slate-900 border-b border-slate-200/60 dark:border-slate-800/80 sticky top-0 z-30">
+      <header className="relative z-10 md:hidden flex items-center justify-between px-6 py-4 bg-white/90 dark:bg-slate-900/95 backdrop-blur-md border-b border-slate-200/80 dark:border-slate-800/80 sticky top-0 z-30">
         <Link href="/admin" className="flex items-center gap-2 text-xl font-bold tracking-tight bg-gradient-to-r from-blue-600 to-teal-500 bg-clip-text text-transparent">
           <Terminal className="w-5 h-5 text-blue-600 dark:text-blue-500" />
           Tark CMS
@@ -50,7 +54,7 @@ export default function AdminLayout({
 
       {/* Sidebar Navigation */}
       <aside className={`
-        fixed inset-y-0 left-0 z-40 w-64 bg-white dark:bg-slate-900 border-r border-slate-200/60 dark:border-slate-800/80 p-6 flex flex-col justify-between transform transition-transform duration-300 md:relative md:transform-none md:translate-x-0
+        relative z-20 fixed inset-y-0 left-0 z-40 w-64 bg-white/85 dark:bg-slate-900/85 backdrop-blur-md border-r border-slate-200/80 dark:border-slate-800/80 p-6 flex flex-col justify-between transform transition-transform duration-300 md:relative md:transform-none md:translate-x-0
         ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'}
       `}>
         <div className="space-y-8">
@@ -123,7 +127,7 @@ export default function AdminLayout({
       )}
 
       {/* Main Administrative Workspace */}
-      <main className="flex-grow p-6 md:p-10 max-w-5xl mx-auto w-full overflow-y-auto">
+      <main className="relative z-10 flex-grow p-6 md:p-10 max-w-5xl mx-auto w-full overflow-y-auto">
         {children}
       </main>
     </div>

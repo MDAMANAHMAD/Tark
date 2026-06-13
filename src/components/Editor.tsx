@@ -6,11 +6,47 @@ import StarterKit from '@tiptap/starter-kit';
 import Link from '@tiptap/extension-link';
 import Image from '@tiptap/extension-image';
 import Youtube from '@tiptap/extension-youtube';
+import { Node, mergeAttributes } from '@tiptap/core';
 import { 
   Bold, Italic, Strikethrough, Heading1, Heading2, Heading3, 
   List, ListOrdered, Quote, Code, Image as ImageIcon, Link as LinkIcon, 
-  Undo, Redo 
+  Undo, Redo, Film 
 } from 'lucide-react';
+
+const VideoExtension = Node.create({
+  name: 'video',
+  group: 'block',
+  selectable: true,
+  draggable: true,
+  atom: true,
+
+  addAttributes() {
+    return {
+      src: {
+        default: null,
+      },
+      controls: {
+        default: true,
+      },
+    };
+  },
+
+  parseHTML() {
+    return [
+      {
+        tag: 'video',
+        getAttrs: (el) => ({
+          src: (el as HTMLElement).getAttribute('src'),
+          controls: (el as HTMLElement).hasAttribute('controls'),
+        }),
+      },
+    ];
+  },
+
+  renderHTML({ HTMLAttributes }) {
+    return ['video', mergeAttributes({ controls: 'true', class: 'aspect-video w-full rounded-xl my-6 shadow-md max-w-2xl mx-auto block outline-none border border-slate-200 dark:border-slate-800' }, HTMLAttributes)];
+  },
+});
 
 const YoutubeIcon = (props: React.SVGProps<SVGSVGElement>) => (
   <svg viewBox="0 0 24 24" fill="currentColor" {...props}>
@@ -25,7 +61,9 @@ interface EditorProps {
 
 export default function Editor({ content, onChange }: EditorProps) {
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const videoInputRef = useRef<HTMLInputElement>(null);
   const [isUploading, setIsUploading] = useState(false);
+  const [isVideoUploading, setIsVideoUploading] = useState(false);
 
   const editor = useEditor({
     extensions: [
@@ -50,6 +88,7 @@ export default function Editor({ content, onChange }: EditorProps) {
           class: 'aspect-video w-full rounded-lg my-6 shadow-md max-w-2xl mx-auto block',
         },
       }),
+      VideoExtension,
     ],
     content: content,
     onUpdate: ({ editor }) => {
@@ -107,6 +146,37 @@ export default function Editor({ content, onChange }: EditorProps) {
     }
   };
 
+  const handleVideoUploadClick = () => {
+    videoInputRef.current?.click();
+  };
+
+  const handleVideoFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    setIsVideoUploading(true);
+    const formData = new FormData();
+    formData.append('file', file);
+
+    try {
+      const res = await fetch('/api/upload', {
+        method: 'POST',
+        body: formData,
+      });
+
+      if (!res.ok) throw new Error('Upload failed');
+      const data = await res.json();
+      
+      editor.chain().focus().insertContent(`<video src="${data.url}" controls="true"></video>`).run();
+    } catch (err) {
+      console.error(err);
+      alert('Failed to upload video.');
+    } finally {
+      setIsVideoUploading(false);
+      if (videoInputRef.current) videoInputRef.current.value = '';
+    }
+  };
+
   const insertImageUrl = () => {
     const url = window.prompt('Enter image URL:');
     if (url) {
@@ -148,6 +218,15 @@ export default function Editor({ content, onChange }: EditorProps) {
         ref={fileInputRef}
         onChange={handleImageFileChange}
         accept="image/*"
+        className="hidden"
+      />
+
+      {/* Hidden file input for video uploads */}
+      <input
+        type="file"
+        ref={videoInputRef}
+        onChange={handleVideoFileChange}
+        accept="video/*"
         className="hidden"
       />
 
@@ -268,6 +347,14 @@ export default function Editor({ content, onChange }: EditorProps) {
           </ToolbarBtn>
 
           <ToolbarBtn 
+            onClick={handleVideoUploadClick}
+            disabled={isVideoUploading}
+            title={isVideoUploading ? 'Uploading...' : 'Upload Video File'}
+          >
+            <Film className={`w-4 h-4 text-purple-600 dark:text-purple-450 ${isVideoUploading ? 'animate-pulse' : ''}`} />
+          </ToolbarBtn>
+
+          <ToolbarBtn 
             onClick={insertYoutube}
             title="Insert YouTube Video"
           >
@@ -374,6 +461,19 @@ export default function Editor({ content, onChange }: EditorProps) {
         }
         .dark .ProseMirror a {
           color: #60a5fa;
+        }
+        .ProseMirror video {
+          aspect-ratio: 16/9;
+          width: 100%;
+          border-radius: 0.75rem;
+          margin: 1.5rem auto;
+          display: block;
+          max-width: 100%;
+          outline: none;
+          box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+        .dark .ProseMirror video {
+          box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.4);
         }
       `}</style>
     </div>
