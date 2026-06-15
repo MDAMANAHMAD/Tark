@@ -53,10 +53,22 @@ Tark CMS includes a private, password-protected administrative dashboard that gi
 
 ---
 
-## 5. Infrastructure & Smart Cost Management
+## 5. Platform Specifications & Capabilities
 
-A key advantage of Tark CMS is its highly efficient server configuration, designed to keep ongoing costs at absolute zero:
+To ensure the platform operates reliably, the system has been built according to the following specifications:
 
-*   **Life-Time Free Databases:** The core database (MongoDB Atlas) has been configured using high-capacity free limits, allowing you to store thousands of articles and user submissions without a monthly charge.
-*   **Free Serverless Hosting:** The website is hosted on Vercel's global network under a free tier, providing lightning-fast global load speeds without hosting bills.
-*   **₹0 Maintenance Fees:** Because the system is custom-built and does not require security patches or plugin subscription renewals, your only ongoing cost is a standard annual domain name renewal (typically around ₹800–₹1,000 per year).
+*   **Full Device Responsiveness:** The layout is fully adaptive, automatically adjusting across standard screen widths:
+    *   **Mobile Screens** (320px - 480px)
+    *   **Tablets & iPads** (481px - 1023px)
+    *   **Laptops & Desktops** (1024px - 1920px+)
+*   **Media Support Specifications:**
+    *   **Images:** Automated support for uploading cover photos (JPEG, PNG, WebP) with automatic cloud compression.
+    *   **Video Formats:** Supports native video file uploads (`.mp4`, `.webm`) and direct integration for YouTube links.
+*   **Security & Access Control:**
+    *   **Encrypted Admin Portal:** Access is locked behind a secure credentials gateway, preventing unauthorized entry.
+    *   **SSL Encrypted Connections:** Full HTTPS encryption across the entire site to protect data transmissions (inquiries and comments).
+*   **Content Capacities:**
+    *   **Unlimited Articles:** Write and maintain thousands of legal posts and drafts.
+    *   **Unlimited Categories:** Group and categorize posts into as many topic folders as needed.
+    *   **Inbox Capacity:** Receive and store client messages without artificial storage limits.
+*   **Moderation Workflow:** All incoming comments are held in a pending state until approved by the admin. Deleting a comment automatically cleans up any nested replies to maintain database cleanliness.
