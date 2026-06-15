@@ -6,15 +6,15 @@ This document outlines the features built, technology utilized, comparative perf
 
 ### 1. Built-In Specifications (What is Implemented)
 
-The platform is customized to provide an outstanding viewing and writing experience with the following specifications:
+The platform has been built with the following custom feature specifications:
 
-*   **Responsive Screen Adaptability:** The layout is fully responsive and adjusts automatically to look professional on all screen sizes (Smartphones, iPads/Tablets, and Laptops/Desktops).
-*   **Stationary Sidebar:** The left sidebar remains locked in place on desktops, keeping the **"View Website"** and **"Sign Out"** buttons permanently visible at the bottom of the screen while only the main content scrolls.
-*   **Interactive Writing Studio:** A Word-like editor that allows the admin to format headers, bold/italicize text, add quotes, create links, and **directly upload video files (.mp4, .webm)** or embed YouTube videos.
-*   **Automatic Image Optimization:** Uploaded cover images are automatically compressed in the cloud to preserve loading speed and bandwidth.
-*   **Comments Moderation Queue:** All visitor comments go to a review queue. The admin can approve, reject, or delete comments with a single click.
-*   **Inquiries Mailbox:** Submissions from the public contact page are stored in a clean dashboard, allowing the admin to click and read client messages in detail popups.
-*   **High-Contrast Visual Design:** The interface uses a clean, light gray-blue background with distinct white cards and strong outlines to ensure text and boxes are easy to read under any brightness setting.
+*   **Stationary Sidebar Navigation Layout:** Lock-on-viewport navigation menu sidebar that isolates vertical scrolling to the main dashboard workspace, keeping **"View Website"** and **"Sign Out"** actions statically pinned to the bottom-left on all desktop screens.
+*   **Custom Tiptap Video Extension:** Integrates a custom schema extension that maps local uploaded video files (`.mp4`, `.webm`) directly into native HTML5 `<video src="..." controls>` players inside the article body.
+*   **Card-Based Comments Moderation Feed:** Replaces wide tables with flexible card layouts featuring auto word-wrapping (`break-words` and `whitespace-pre-wrap`) and instant toggle action buttons to **Approve**, **Reject**, or **Delete** comments.
+*   **SVG Views Traffic Analytics Chart:** A custom vector-based 7-day traffic chart that maps visitor statistics coordinates dynamically inside the SVG, featuring aligned benchmark grids, scale labels, and circle node hover tooltips.
+*   **High-Contrast Glassmorphism Design:** Core layout style variables configured with soft gray-blue backdrops (`#edf1f6`), semi-opaque white cards (`rgba(255, 255, 255, 0.96)`), and strong borders (`rgba(148, 163, 184, 0.38)`) to maintain visibility on low-contrast screens.
+*   **Modal Inquiry Workspace:** A dual-layer inbox that logs submissions from the public contact form and lets the admin click any entry to read full messages, client metadata, and timestamps in focused popup windows.
+*   **Dynamic Database Seeder API:** An administrative database initializer route (`/api/init?force=true`) that automatically clears records and seeds **10 mock legal blogs, categories, discussion comments, and contact inquiries** directly into the MongoDB Atlas database.
 
 ---
 
