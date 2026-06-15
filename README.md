@@ -6,8 +6,6 @@ Welcome to **Tark CMS**, a premium, custom-built web application designed specif
 
 Unlike generic website builders like WordPress, which rely on heavy templates and bloated third-party plugins, Tark CMS has been designed from the ground up as a **bespoke, modern solution**. The platform prioritizes maximum page-loading speeds, bulletproof security, and an exceptionally smooth writing experience. 
 
-Most importantly, because of this custom-coded design, the baseline operating costs for the platform are **practically zero**, completely eliminating the monthly maintenance fees, security subscriptions, and plugin costs associated with traditional web development.
-
 ---
 
 ## 2. The Power of Custom Development (Why Next.js & Vercel?)
@@ -16,7 +14,7 @@ To deliver a high-end web experience, the platform uses a modern technology fram
 
 *   **Instant Page Loading:** Standard websites build page content on-demand every time a user clicks, leading to sluggish loading times. Tark CMS uses static pre-rendering, meaning all pages are pre-built in the cloud and load instantly for your visitors.
 *   **Immune to Hacking:** WordPress sites are notoriously vulnerable to hackers due to outdated plugins and themes. Because Tark CMS is custom-coded without external dependencies, there are no databases or plugins exposed to standard automated web attacks.
-*   **Zero Plugin Upkeep:** You will never have to worry about updating plugins, dealing with broken site layouts after an update, or paying licensing fees for basic features.
+*   **Zero Plugin Upkeep:** You will never have to worry about updating plugins, dealing with broken site layouts after an update, or handling complex configurations for basic features.
 *   **Built-in Optimization:** Images, text, and layouts are automatically optimized behind the scenes, ensuring the site remains fast and responsive even as your catalog grows.
 
 ---
